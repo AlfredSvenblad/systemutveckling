@@ -1,0 +1,72 @@
+<script src="http://spelprogrammering.nu/simple.js">
+    function Zombie(startX, startY, xSpeed,color) {
+        this.x = startX;
+        this.y = startY;
+        this.xSpeed = xSpeed;
+        this.color =color;
+
+
+        this.update = function(){
+            if(this.x>-50){
+            this.x += this.xSpeed;
+            save();
+            translate(this.x,this.y);
+            rectangle(3,110,23,65,"lightgreen");
+            rectangle(3,95,23,65,color);
+            circle(15,80,20,"lightgreen");
+            circle(0,80,3,"red");
+            rectangle(-35,100,30,14,"lightgreen");
+            rectangle(-20,100,30,14,color);
+            restore();
+            }
+        }
+    }
+    function Survivor(startX, startY, xSpeed,color) {
+        this.x = startX;
+        this.y = startY;
+        this.xSpeed = xSpeed;
+        this.color =color;
+
+
+        this.update = function(){
+            this.x += this.xSpeed;
+            save();
+            translate(this.x,this.y);
+            rectangle(3,110,23,65,"tan");
+            rectangle(3,95,23,65,color);
+            circle(15,80,20,"tan");
+            circle(0,80,3,"black");
+            text(-93, 40, 30,"Help me!","red");
+            restore();
+
+        }
+    }
+
+    function start() {
+        
+        zombies = [];
+        survivor = [];
+        let a=100;
+        for(let i=0;i<a;i++){
+        let ball = {e:random(2000)+1900, f:random(780)-90,sp:random(-400)/200-1, color:mixColor(random(255), random(255), random(255))}
+        zombies[i] = new Zombie(ball.e,ball.f,ball.sp,ball.color);
+        }
+        survivor[0] = new Survivor(1850,400,-3,"blue");  
+    }
+
+    function update() {
+        clearScreen();
+        rectangle(0,0, 2000, 2000, "yellowgreen");
+        for(let i=0;i<zombies.length;i++){
+            zombies[i].update();
+        }
+        survivor[0].update();
+        k=random(100);
+        if(k>90){
+        let ball = {e:random(2000)+1900, f:random(780)-90,sp:random(-400)/200-1, color:mixColor(random(255), random(255), random(255))}
+        zombies[zombies.length] = new Zombie(ball.e,ball.f,ball.sp,ball.color);}
+        text(20, 100, 30,"hordens storlek:", mixColor(244, 196, 48));
+            text(420, 100, 30,zombies.length, mixColor(244, 196, 48));
+    }
+
+</script>
