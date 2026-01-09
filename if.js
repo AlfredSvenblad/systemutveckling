@@ -1,5 +1,5 @@
 //IF satser används för selektion
-
+//lite random text
 let temp =-3;
 
 if (temp>24){
